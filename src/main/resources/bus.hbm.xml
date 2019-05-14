@@ -1,0 +1,24 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class name="com.epam.entity.Bus" table="busses">
+    <id column="id" name="id" type="java.lang.Long">
+        <generator class="select">
+            <param name="key">number</param>
+        </generator>
+    </id>
+    <property column="numb" name="number" type="java.lang.String"/>
+    <property column="route_id" name="route_id" type="java.lang.Long"/>
+    <set name="drivers" table="busdriver" inverse="true" lazy="false">
+        <key>
+            <column name="bus_id"></column>
+        </key>
+        <many-to-many entity-name="com.epam.entity.Driver">
+            <column name="driver_id"></column>
+        </many-to-many>
+    </set>
+</class>
+</hibernate-mapping>
